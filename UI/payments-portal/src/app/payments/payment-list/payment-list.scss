@@ -1,0 +1,36 @@
+/* payment-list.component.scss */
+
+.full-width {
+  width: 100%;
+}
+
+.table-container {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.search {
+  width: 300px;
+  margin-bottom: 16px;
+}
+
+th.mat-header-cell {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.list-header h2 {
+  margin: 0;
+}
+
+.add-button {
+  margin-left: auto;
+}
+
