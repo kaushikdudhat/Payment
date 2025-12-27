@@ -24,8 +24,18 @@ namespace Payments.Api.Services
                 return existing;
 
             var today = DateTime.UtcNow.Date;
-            var countToday = await _context.Payments
-                .CountAsync(p => p.CreatedAt.Date == today);
+            var lastReference = await _context.Payments
+                .Where(p => p.CreatedAt.Date == today)
+                .OrderByDescending(p => p.Reference)
+                .Select(p => p.Reference)
+                .FirstOrDefaultAsync();
+
+            int nextNumber = 1;
+            if (!string.IsNullOrEmpty(lastReference) &&
+                int.TryParse(lastReference.Split('-').Last(), out int lastNumber))
+            {
+                nextNumber = lastNumber + 1;
+            }
 
             var payment = new Payment
             {
@@ -33,7 +43,7 @@ namespace Payments.Api.Services
                 Amount = dto.Amount,
                 Currency = dto.Currency,
                 CreatedAt = DateTime.UtcNow,
-                Reference = $"PAY-{today:yyyyMMdd}-{(countToday + 1):D4}"
+                Reference = $"PAY-{today:yyyyMMdd}-{nextNumber:D4}"
             };
 
             _context.Payments.Add(payment);
