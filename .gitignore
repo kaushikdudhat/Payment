@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Payment.Api/.vs
+/Payment.Api/bin/Debug/net8.0
+/Payment.Api/obj
